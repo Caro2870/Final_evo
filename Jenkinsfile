@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools { 
         maven 'MAVEN_3_6_3' 
-        jdk 'JDK_1_11' 
+        jdk 'JAVA_HOME' 
     }
 	
     stages {
@@ -24,13 +24,6 @@ pipeline {
             }
         }
 
-		stage ('sonarQube Analysis') {
-			steps {
-				withSonarQubeEnv('sonarQube') {
-					bat 'mvn clean verify sonar:sonar -Dsonar.projectKey=ventas'
-				}
-			}
-		}
 
         stage ('package Stage') {
             steps {
@@ -39,7 +32,6 @@ pipeline {
                 }
             }
         }
-		
 
     }
 }
